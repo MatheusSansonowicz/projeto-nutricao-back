@@ -16,10 +16,10 @@ public class IngredienteNaPreparacao {
 	@JoinColumn(nullable = false, name = "ingrediente_id")
 	private Ingrediente ingrediente;
 
-	/*
+
 	@ManyToOne
 	@JoinColumn(nullable = false, name = "preparacao_id")
-	private Preparacao preparacaoPertencente;*/
+	private Preparacao preparacaoPertencente;
 
 	private String MedidaCaseira;
 

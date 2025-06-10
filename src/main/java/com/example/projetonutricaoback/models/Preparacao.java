@@ -13,7 +13,7 @@ public class Preparacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int Id;
 
-    @OneToMany
+    @OneToMany(mappedBy = "preparacaoPertencente")
     private List<IngredienteNaPreparacao> ingredientesUsados;
 
 	private String NomePreparacao;
