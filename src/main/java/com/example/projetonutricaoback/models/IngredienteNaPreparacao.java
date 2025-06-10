@@ -16,7 +16,6 @@ public class IngredienteNaPreparacao {
 	@JoinColumn(nullable = false, name = "ingrediente_id")
 	private Ingrediente ingrediente;
 
-
 	@ManyToOne
 	@JoinColumn(nullable = false, name = "preparacao_id")
 	private Preparacao preparacaoPertencente;
@@ -47,6 +46,11 @@ public class IngredienteNaPreparacao {
 		double CustoUso = VariavelApoio / this.GramagemComprada;
 		this.CustoUso = CustoUso;
 		return CustoUso;
+	}
+
+	public double calculaPercapitaPL(double NumPorcoes){
+		this.PerCapitaPL = this.PesoLiquido / NumPorcoes;
+		return PerCapitaPL;
 	}
 
 }

@@ -8,10 +8,7 @@ public class TotaisPreparacao {
 
 	private double totalGramas;
 
-	/*public double ValorCaloricoTotal(){
-        double total;
-        return total;
-    };*/
+	public double ValorCaloricoTotal;
 
 	public double TotalG() {
 		return 0;

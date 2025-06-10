@@ -30,7 +30,7 @@ public class Preparacao {
 
 	private double CustoTotal;
 
-	private int numPorcoes;
+	private double numPorcoes;
 
 	private double CustoPerCapta;
 
