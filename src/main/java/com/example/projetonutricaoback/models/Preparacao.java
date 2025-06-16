@@ -16,6 +16,10 @@ public class Preparacao {
     @OneToMany(mappedBy = "preparacaoPertencente")
     private List<IngredienteNaPreparacao> ingredientesUsados;
 
+	@ManyToOne
+	@JoinColumn(name = "usuario_id")
+	private Usuario usuarioCriadorPreparacao;
+
 	private String NomePreparacao;
 
 	private String Categoria;

@@ -27,7 +27,10 @@ public class Usuario {
         return false;
     }
 
-    @OneToMany(mappedBy = "usuarioCriador", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuarioCriadorIngrediente")
     private List<Ingrediente> IngredientesCriados;
+
+    @OneToMany(mappedBy = "usuarioCriadorPreparacao")
+    private List<Preparacao> PreparacoesCriadas;
 
 }
