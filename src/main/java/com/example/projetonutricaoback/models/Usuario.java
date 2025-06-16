@@ -10,13 +10,17 @@ import java.util.List;
 public class Usuario {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
 
+    private String nome;
 
-    private String Nome;
+    //@GeneratedValue(strategy = GenerationType.UUID)
+    //private String Login;
 
-    private String Senha;
+    private String senha;
 
+    @Column(unique = true)
     private String email;
 
     public boolean Login() {
@@ -28,9 +32,9 @@ public class Usuario {
     }
 
     @OneToMany(mappedBy = "usuarioCriadorIngrediente")
-    private List<Ingrediente> IngredientesCriados;
+    private List<Ingrediente> ingredientesCriados;
 
     @OneToMany(mappedBy = "usuarioCriadorPreparacao")
-    private List<Preparacao> PreparacoesCriadas;
+    private List<Preparacao> preparacoesCriadas;
 
 }
