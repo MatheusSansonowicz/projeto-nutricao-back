@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/usuario")
+
 public class UsuarioControler {
 
     private final UsuarioRepository usuarioRepository;
@@ -17,24 +18,9 @@ public class UsuarioControler {
         this.usuarioRepository = usuarioRepository;
     }
 
-    @GetMapping
-    public List<Usuario> findAll() {
-        return usuarioRepository.findAll();
-    }
-
-    @GetMapping("/perfil")
-    public List<Usuario> findByEmail(String email) {
-        return usuarioRepository.findByEmail(email);
-    }
-
     @PostMapping("/criarconta")
-    public Usuario criar(@PathVariable Usuario usuario) {
+    public Usuario criar(@RequestBody Usuario usuario) {
         return usuarioRepository.save(usuario);
-    }
-
-    @GetMapping("/{email}")
-    public Usuario exibirPerfil(@PathVariable String email) {
-        return (Usuario) usuarioRepository.findByEmail(email);
     }
 
 }
