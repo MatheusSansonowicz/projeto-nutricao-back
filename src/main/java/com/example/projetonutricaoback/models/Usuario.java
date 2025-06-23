@@ -21,19 +21,19 @@ public class Usuario {
 
     private String senha;
 
-    @Column(unique = true)
+    //@Column(unique = true)
     private String email;
 
-    //@GeneratedValue(strategy = GenerationType.UUID)
-    //private String Login;
-
-    public boolean Login() {
-        return false;
-    }
-
-    public boolean Deslogar() {
-        return false;
-    }
+//    @GeneratedValue(strategy = GenerationType.UUID)
+//    private String Login;
+//
+//    public boolean Login() {
+//        return false;
+//    }
+//
+//    public boolean Deslogar() {
+//        return false;
+//    }
 
     @OneToMany(mappedBy = "usuarioCriadorIngrediente")
     private List<Ingrediente> ingredientesCriados;

@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/usuario")
-@CrossOrigin(origins = "*")
+
 public class UsuarioControler {
 
     private final UsuarioRepository usuarioRepository;
@@ -25,7 +25,8 @@ public class UsuarioControler {
     public List<Usuario> findAll() {
         return usuarioRepository.findAll();
     }
-    @PostMapping
+
+    @PostMapping("/registro")
     public Usuario post(@RequestBody Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
@@ -35,12 +36,12 @@ public class UsuarioControler {
         return usuarioRepository.findById(id).orElseThrow();
     }
 
-    @GetMapping("/usuarios/{email}")
-    public Usuario findByEmail(@PathVariable String email) {
-        return usuarioRepository.findByEmail(email)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Usuário não encontrado com email: " + email
-                ));
-    }
+//    @GetMapping("/usuarios/{email}")
+//    public Usuario findByEmail(@PathVariable String email) {
+//        return usuarioRepository.findByEmail(email)
+//                .orElseThrow(() -> new ResponseStatusException(
+//                        HttpStatus.NOT_FOUND,
+//                        "Usuário não encontrado com email: " + email
+//                ));
+//    }
 }
