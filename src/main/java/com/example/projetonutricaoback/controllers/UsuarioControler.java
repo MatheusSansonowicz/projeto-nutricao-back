@@ -1,6 +1,5 @@
 package com.example.projetonutricaoback.controllers;
 
-
 import com.example.projetonutricaoback.models.Usuario;
 import com.example.projetonutricaoback.repositorys.UsuarioRepository;
 import org.springframework.http.HttpStatus;
@@ -21,27 +20,17 @@ public class UsuarioControler {
         this.usuarioRepository = usuarioRepository;
     }
 
-    @GetMapping
-    public List<Usuario> findAll() {
-        return usuarioRepository.findAll();
-    }
-
     @PostMapping("/registro")
     public Usuario post(@RequestBody Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
 
-    @GetMapping("/{id}")
-    public Usuario getById(@PathVariable int id) {
-        return usuarioRepository.findById(id).orElseThrow();
+     @GetMapping("/login/{email}")
+    public Usuario findByEmail(@PathVariable String email) {
+        return usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Usuário não encontrado com email: " + email
+                ));
     }
-
-//    @GetMapping("/usuarios/{email}")
-//    public Usuario findByEmail(@PathVariable String email) {
-//        return usuarioRepository.findByEmail(email)
-//                .orElseThrow(() -> new ResponseStatusException(
-//                        HttpStatus.NOT_FOUND,
-//                        "Usuário não encontrado com email: " + email
-//                ));
-//    }
 }
