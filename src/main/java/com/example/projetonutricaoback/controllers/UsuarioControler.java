@@ -20,17 +20,24 @@ public class UsuarioControler {
         this.usuarioRepository = usuarioRepository;
     }
 
-    @PostMapping("/registro")
-    public Usuario post(@RequestBody Usuario usuario) {
-        return usuarioRepository.save(usuario);
-    }
+//    @PostMapping("/registrar")
+//    public Usuario registrar(@RequestBody Usuario usuario) {
+//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//        usuario.setSenha(encoder.encode(usuario.getSenha()));
+//        return usuarioRepository.save(usuario);
+//    }
 
-     @GetMapping("/login/{email}")
+     @GetMapping("/{email}")
     public Usuario findByEmail(@PathVariable String email) {
         return usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
                         "Usuário não encontrado com email: " + email
                 ));
+    }
+
+    @GetMapping("/login")
+    public Usuario login(@RequestParam String email, @RequestParam String password) {
+        return usuarioRepository.findByEmailAndSenha(email, password);
     }
 }
