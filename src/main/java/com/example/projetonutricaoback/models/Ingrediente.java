@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Data
+
 public class Ingrediente {
 
     @Id
@@ -31,4 +31,91 @@ public class Ingrediente {
     @JoinColumn(name = "usuario_id")
     private Usuario usuarioCriadorIngrediente;
 
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public String getNome() {
+        return Nome;
+    }
+
+    public void setNome(String nome) {
+        Nome = nome;
+    }
+
+    public double getProteinas() {
+        return Proteinas;
+    }
+
+    public void setProteinas(double proteinas) {
+        Proteinas = proteinas;
+    }
+
+    public double getCarboidratos() {
+        return Carboidratos;
+    }
+
+    public void setCarboidratos(double carboidratos) {
+        Carboidratos = carboidratos;
+    }
+
+    public double getLipidios() {
+        return Lipidios;
+    }
+
+    public void setLipidios(double lipidios) {
+        Lipidios = lipidios;
+    }
+
+    public double getSodio() {
+        return Sodio;
+    }
+
+    public void setSodio(double sodio) {
+        Sodio = sodio;
+    }
+
+    public double getGordSaturada() {
+        return GordSaturada;
+    }
+
+    public void setGordSaturada(double gordSaturada) {
+        GordSaturada = gordSaturada;
+    }
+
+    public Usuario getUsuarioCriadorIngrediente() {
+        return usuarioCriadorIngrediente;
+    }
+
+    public void setUsuarioCriadorIngrediente(Usuario usuarioCriadorIngrediente) {
+        this.usuarioCriadorIngrediente = usuarioCriadorIngrediente;
+    }
+
+    public Ingrediente(int id, String nome, double proteinas, double carboidratos, double lipidios, double sodio, double gordSaturada, Usuario usuarioCriadorIngrediente) {
+        Id = id;
+        Nome = nome;
+        Proteinas = proteinas;
+        Carboidratos = carboidratos;
+        Lipidios = lipidios;
+        Sodio = sodio;
+        GordSaturada = gordSaturada;
+        this.usuarioCriadorIngrediente = usuarioCriadorIngrediente;
+    }
+
+    public Ingrediente() {
+    }
+
+    public Ingrediente(String nome, double proteinas, double carboidratos, double lipidios, double sodio, double gordSaturada, Usuario usuarioCriadorIngrediente) {
+        Nome = nome;
+        Proteinas = proteinas;
+        Carboidratos = carboidratos;
+        Lipidios = lipidios;
+        Sodio = sodio;
+        GordSaturada = gordSaturada;
+        this.usuarioCriadorIngrediente = usuarioCriadorIngrediente;
+    }
 }
