@@ -118,4 +118,13 @@ public class Ingrediente {
         GordSaturada = gordSaturada;
         this.usuarioCriadorIngrediente = usuarioCriadorIngrediente;
     }
+
+    public Ingrediente(String nome, double proteinas, double carboidratos, double lipidios, double sodio, double gordSaturada) {
+        Nome = nome;
+        Proteinas = proteinas;
+        Carboidratos = carboidratos;
+        Lipidios = lipidios;
+        Sodio = sodio;
+        GordSaturada = gordSaturada;
+    }
 }
