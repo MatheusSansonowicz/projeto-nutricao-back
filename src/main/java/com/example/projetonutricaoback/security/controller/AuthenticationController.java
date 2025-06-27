@@ -40,16 +40,24 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Void> register(@RequestBody @Valid RegisterDTO data) {
-        if (this.usuarioRepository.findByEmail(data.login()).isPresent()) {
-            return ResponseEntity.badRequest().build();
+    public ResponseEntity<?> register(@RequestBody @Valid RegisterDTO data) {
+        try {
+            if (this.usuarioRepository.findByEmail(data.login()).isPresent()) {
+                return ResponseEntity.badRequest()
+                    .body(new ErrorResponse("Email already registered"));
+            }
+
+            String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
+            Usuario newUser = new Usuario(encryptedPassword, data.nome(), data.login(), data.role());
+
+            this.usuarioRepository.save(newUser);
+
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                .body(new ErrorResponse("Error during registration: " + e.getMessage()));
         }
-
-        String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        Usuario newUser = new Usuario(encryptedPassword, data.nome(), data.login(), data.role());
-
-        this.usuarioRepository.save(newUser);
-
-        return ResponseEntity.ok().build();
     }
+
+    private record ErrorResponse(String message) {}
 }
