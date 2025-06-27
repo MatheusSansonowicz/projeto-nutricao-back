@@ -1,58 +1,100 @@
 package com.example.projetonutricaoback.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import jdk.jfr.Enabled;
 import lombok.Data;
 
 @Entity
 @Data
 public class IngredienteNaPreparacao {
 
+	//1 - Identificaçoes
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@ManyToOne
+	@JsonBackReference
 	@JoinColumn(nullable = false, name = "ingrediente_id")
 	private Ingrediente ingrediente;
 
-
 	@ManyToOne
+	@JsonBackReference
 	@JoinColumn(nullable = false, name = "preparacao_id")
 	private Preparacao preparacaoPertencente;
 
-	private String MedidaCaseira;
+	//2 - Primeira metade da ficha
 
-	private double PesoBruto;
+	private String medidaCaseira;
 
-	private double PesoLiquido;
+	private double pesoBruto;
 
-	private double CustoCompra;
+	private double pesoLiquido;
 
-	private double GramagemComprada;
+	private double custoCompra;
 
-	private double PerCapitaPL;
+	private double gramagemComprada;
+	//Nota: não aparece na ficha
+	// mas é necessário p calcular o custo uso.
 
-	private double CustoUso;
+	private double custoUso;
 
-	private double FatorCoccao;
+	private double fatorCoccao;
 
 	public double CalculaFC() {
-		this.FatorCoccao = this.PesoBruto / this.PesoLiquido;
-		return FatorCoccao;
+		this.fatorCoccao = this.pesoBruto / this.pesoLiquido;
+		return fatorCoccao;
 	}
 
 	public double CaulculaCustoUso() {
-		double VariavelApoio = this.CustoCompra * PesoBruto;
-		double CustoUso = VariavelApoio / this.GramagemComprada;
-		this.CustoUso = CustoUso;
+		double VariavelApoio = this.custoCompra * pesoBruto;
+		double CustoUso = VariavelApoio / this.gramagemComprada;
+		this.custoUso = CustoUso;
 		return CustoUso;
 	}
 
-	/*public double calculaPercapitaPL(){
+	//3 - Segunda metade da ficha
+	//Nota: apenas de cada ingrediente,
+	//os totais por preparação ficam na
+	//classe preparação.
+
+	private double PerCapitaPL;
+
+	public double calculaPercapitaPL(){
 		double numPorcoes = this.preparacaoPertencente.getNumPorcoes();
-		this.PerCapitaPL = this.PesoLiquido / numPorcoes;
+		this.PerCapitaPL = this.pesoLiquido / numPorcoes;
 		return PerCapitaPL;
-	}*/
+	}
+
+	private double proteinasIngPrep;
+
+	public double calculaProteinas(){
+		this.proteinasIngPrep = this.ingrediente.getProteinas()*this.getPesoLiquido();
+		return proteinasIngPrep;
+	}
+
+	private double carboidratosIngPrep;
+	public double calculaCarboidratos(){
+		this.carboidratosIngPrep = this.ingrediente.getCarboidratos()*this.getPesoLiquido();
+		return carboidratosIngPrep;
+	}
+
+	private double lipidiosIngPrep;
+	public double calculaLipidios(){
+		this.lipidiosIngPrep = this.ingrediente.getLipidios()*this.getPesoLiquido();
+		return lipidiosIngPrep;
+	}
+
+	private double sodioIngPrep;
+	public double calculaSodio(){
+		this.sodioIngPrep = this.ingrediente.getSodio()*this.getPesoLiquido();
+		return sodioIngPrep;
+	}
+
+	private double gorduraSatIngPrep;
+	public double calculaGorduraSat(){
+		this.gorduraSatIngPrep = this.ingrediente.getGordSaturada()*this.getPesoLiquido();
+		return gorduraSatIngPrep;
+	}
 
 }

@@ -1,7 +1,7 @@
 package com.example.projetonutricaoback.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
 
 @Entity
 
@@ -9,82 +9,89 @@ public class Ingrediente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private int id;
 
     //atributos puxados da taco ou inseridos p usuario
     @Column(unique = true, nullable = false)
-    private String Nome;
+    private String nome;
     @Column(nullable = false)
-    private double Proteinas;
+    private double proteinas;
     @Column(nullable = false)
-    private double Carboidratos;
+    private double carboidratos;
     @Column(nullable = false)
-    private double Lipidios;
+    private double lipidios;
 
     //atributos nao obrigatorios - nao encontrados na taco
     @Column(nullable = true)
-    private double Sodio;
+    private Double sodio;
     @Column(nullable = true)
-    private double GordSaturada;
+    private Double gordSaturada;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "usuario_id")
     private Usuario usuarioCriadorIngrediente;
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        id = id;
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-        Nome = nome;
+        this.nome = nome;
     }
 
     public double getProteinas() {
-        return Proteinas;
+        return proteinas;
     }
 
     public void setProteinas(double proteinas) {
-        Proteinas = proteinas;
+        this.proteinas = proteinas;
     }
 
     public double getCarboidratos() {
-        return Carboidratos;
+        return carboidratos;
     }
 
     public void setCarboidratos(double carboidratos) {
-        Carboidratos = carboidratos;
+        carboidratos = carboidratos;
     }
 
     public double getLipidios() {
-        return Lipidios;
+        return lipidios;
     }
 
     public void setLipidios(double lipidios) {
-        Lipidios = lipidios;
+        this.lipidios = lipidios;
     }
 
     public double getSodio() {
-        return Sodio;
+        if (sodio == null) {
+            return 0.0;
+        }
+        return sodio;
     }
 
     public void setSodio(double sodio) {
-        Sodio = sodio;
+        this.sodio = sodio;
     }
 
     public double getGordSaturada() {
-        return GordSaturada;
+        if (gordSaturada == null) {
+            return 0.0;
+        }
+        return gordSaturada;
     }
 
     public void setGordSaturada(double gordSaturada) {
-        GordSaturada = gordSaturada;
+        this.gordSaturada = gordSaturada;
     }
 
     public Usuario getUsuarioCriadorIngrediente() {
@@ -95,36 +102,36 @@ public class Ingrediente {
         this.usuarioCriadorIngrediente = usuarioCriadorIngrediente;
     }
 
-    public Ingrediente(int id, String nome, double proteinas, double carboidratos, double lipidios, double sodio, double gordSaturada, Usuario usuarioCriadorIngrediente) {
-        Id = id;
-        Nome = nome;
-        Proteinas = proteinas;
-        Carboidratos = carboidratos;
-        Lipidios = lipidios;
-        Sodio = sodio;
-        GordSaturada = gordSaturada;
+    public Ingrediente(int id, String nome, double proteinas, double carboidratos, double lipidios, Double sodio, Double gordSaturada, Usuario usuarioCriadorIngrediente) {
+        this.id = id;
+        this.nome = nome;
+        this.proteinas = proteinas;
+        this.carboidratos = carboidratos;
+        this.lipidios = lipidios;
+        this.sodio = sodio;
+        this.gordSaturada = gordSaturada;
         this.usuarioCriadorIngrediente = usuarioCriadorIngrediente;
     }
 
     public Ingrediente() {
     }
 
-    public Ingrediente(String nome, double proteinas, double carboidratos, double lipidios, double sodio, double gordSaturada, Usuario usuarioCriadorIngrediente) {
-        Nome = nome;
-        Proteinas = proteinas;
-        Carboidratos = carboidratos;
-        Lipidios = lipidios;
-        Sodio = sodio;
-        GordSaturada = gordSaturada;
+    public Ingrediente(String nome, double proteinas, double carboidratos, double lipidios, Double sodio, Double gordSaturada, Usuario usuarioCriadorIngrediente) {
+        this.nome = nome;
+        this.proteinas = proteinas;
+        this.carboidratos = carboidratos;
+        this.lipidios = lipidios;
+        this.sodio = sodio;
+        this.gordSaturada = gordSaturada;
         this.usuarioCriadorIngrediente = usuarioCriadorIngrediente;
     }
 
-    public Ingrediente(String nome, double proteinas, double carboidratos, double lipidios, double sodio, double gordSaturada) {
-        Nome = nome;
-        Proteinas = proteinas;
-        Carboidratos = carboidratos;
-        Lipidios = lipidios;
-        Sodio = sodio;
-        GordSaturada = gordSaturada;
+    public Ingrediente(String nome, double proteinas, double carboidratos, double lipidios, Double sodio, Double gordSaturada) {
+        this.nome = nome;
+        this.proteinas = proteinas;
+        this.carboidratos = carboidratos;
+        this.lipidios = lipidios;
+        this.sodio = sodio;
+        this.gordSaturada = gordSaturada;
     }
 }

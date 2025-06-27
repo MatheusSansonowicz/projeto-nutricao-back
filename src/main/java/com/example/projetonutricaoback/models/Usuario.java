@@ -1,5 +1,6 @@
 package com.example.projetonutricaoback.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -37,9 +38,11 @@ public class Usuario {
 //    }
 
     @OneToMany(mappedBy = "usuarioCriadorIngrediente")
+    @JsonBackReference
     private List<Ingrediente> ingredientesCriados;
 
     @OneToMany(mappedBy = "usuarioCriadorPreparacao")
+    @JsonBackReference
     private List<Preparacao> preparacoesCriadas;
 
 //    public boolean equals(String senha) {

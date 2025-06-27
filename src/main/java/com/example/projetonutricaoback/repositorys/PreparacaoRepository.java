@@ -1,10 +1,10 @@
 package com.example.projetonutricaoback.repositorys;
 
+import com.example.projetonutricaoback.models.Preparacao;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.projetonutricaoback.models.Ingrediente;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IngredienteRepository extends JpaRepository<Ingrediente, Integer> {
+public interface PreparacaoRepository extends JpaRepository<Preparacao, Integer> {
 
 }
