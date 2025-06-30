@@ -36,7 +36,7 @@ public class Ingrediente {
     private Usuario usuarioCriadorIngrediente;
 
     public int getId() {
-        return Id;
+        return id;
     }
 
 

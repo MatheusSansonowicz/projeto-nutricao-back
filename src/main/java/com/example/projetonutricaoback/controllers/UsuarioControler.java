@@ -42,7 +42,8 @@ public class UsuarioControler {
     public Usuario getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
-
+        return usuarioRepository.findByEmail(email).orElseThrow();
+    }
     @GetMapping("/{email}")
     public Usuario findByEmail(@PathVariable String email) {
 

@@ -71,11 +71,6 @@ public class PreparacaoController {
         return preparacaoRepository.findById(id).get();
     }
 
-    @PostMapping("/criarPrepacaro")
-    public Preparacao criarPreparacao(@RequestBody Preparacao preparacao) {
-        return preparacaoRepository.save(preparacao);
-    }
-
     @DeleteMapping("/deletarpreparacao/{id}")
     public void deletarPreparacao(@RequestBody Preparacao preparacao) {
         preparacaoRepository.delete(preparacao);

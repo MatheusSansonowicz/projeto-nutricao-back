@@ -19,11 +19,6 @@ public class Preparacao {
 
 	private int Id;
 
-	@OneToMany(mappedBy = "preparacaoPertencente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JsonManagedReference
-	private List<IngredienteNaPreparacao> ingredientesUsados;
-
-
 	// 1 - Cabeçalho
 	@ManyToOne
 	@JsonBackReference
@@ -37,7 +32,8 @@ public class Preparacao {
 	private int numero;
 
 	// 2- Primeira metade da ficha
-	@OneToMany(mappedBy = "preparacaoPertencente")
+	@OneToMany(mappedBy = "preparacaoPertencente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonManagedReference
 	private List<IngredienteNaPreparacao> ingredientesUsados;
 
 
@@ -53,14 +49,6 @@ public class Preparacao {
 
 	private double custoPerCapta;
 
-
-	private double rendimento;
-
-	private double tempoPorcoes;
-
-	private String medidaCaseira;
-
-	private double fccPreparacao;
 
 	private double rendimento;
 
@@ -91,9 +79,9 @@ public class Preparacao {
 		totalGramasLipidios = 0;
 
 		for (IngredienteNaPreparacao i : ingredientesUsados){
-			totalGramasProteinas += i.getProteinasIngPrep();
-			totalGramasCarboidratos += i.getCarboidratosIngPrep();
-			totalGramasLipidios += i.getLipidiosIngPrep();
+			totalGramasProteinas += i.getIngrediente().getProteinas();
+			totalGramasCarboidratos += i.getIngrediente().getCarboidratos();
+			totalGramasLipidios += i.getIngrediente().getLipidios();
 		}
 
 		totalKcalProteinas = totalGramasProteinas * 4;
@@ -108,7 +96,7 @@ public class Preparacao {
 	public void setTotalGramasSodio() {
 		totalGramasSodio = 0;
 		for (IngredienteNaPreparacao i : ingredientesUsados){
-			totalGramasSodio += i.getSodioIngPrep();
+			totalGramasSodio += i.getIngrediente().getSodio();
 		}
 	}
 
@@ -119,7 +107,7 @@ public class Preparacao {
 	public void setTotalGramasGordSaturada() {
 		totalGramasGordSaturada = 0;
 		for (IngredienteNaPreparacao i : ingredientesUsados){
-			totalGramasGordSaturada += i.getGorduraSatIngPrep();
+			totalGramasGordSaturada += i.getIngrediente().getGordSaturada();
 		}
 	}
 

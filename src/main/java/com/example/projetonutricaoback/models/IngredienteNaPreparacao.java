@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
+@Data
 @Entity
 public class IngredienteNaPreparacao {
 
@@ -20,21 +21,9 @@ public class IngredienteNaPreparacao {
 	@ManyToOne
 	@JsonBackReference
 	@JoinColumn(nullable = false, name = "preparacao_id")
-	@JsonBackReference
 	private Preparacao preparacaoPertencente;
 
 
-	private String medidaCaseira;
-
-	private double pesoBruto;
-
-	private double pesoLiquido;
-
-	private double custoCompra;
-
-	private double gramagemComprada;
-
-	private double perCapitaPL;
 
 	//2 - Primeira metade da ficha
 
@@ -51,6 +40,8 @@ public class IngredienteNaPreparacao {
 	// mas é necessário p calcular o custo uso.
 
 	private double custoUso;
+
+	private double perCapitaPL;
 
 	private double fatorCoccao;
 
@@ -153,13 +144,13 @@ public class IngredienteNaPreparacao {
 
 	public void setFatorCoccao(double fatorCoccao) {
 		this.fatorCoccao = fatorCoccao;
-    
+
+	}
 	public double CaulculaCustoUso() {
 		double VariavelApoio = this.custoCompra * pesoBruto;
 		double CustoUso = VariavelApoio / this.gramagemComprada;
 		this.custoUso = CustoUso;
-		return CustoUso;
-
+		return custoUso;
 	}
 
 	//3 - Segunda metade da ficha
@@ -205,4 +196,5 @@ public class IngredienteNaPreparacao {
 		this.gorduraSatIngPrep = this.ingrediente.getGordSaturada()*this.getPesoLiquido();
 		return gorduraSatIngPrep;
 	}
+
 }

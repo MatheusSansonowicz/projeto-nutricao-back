@@ -15,7 +15,6 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-
 @Data
 public class Usuario implements UserDetails {
 
@@ -51,70 +50,70 @@ public class Usuario implements UserDetails {
         this.nome = nome;
         this.email = email;
         this.role = role; }
-//
-//    public Usuario(String senha, String nome, String email) {
-//        this.senha = senha;
-//        this.nome = nome;
-//        this.email = email;
-//
-//    }
-//
-//    public Usuario(List<Preparacao> preparacoesCriadas, List<Ingrediente> ingredientesCriados, String email, String senha, String nome, int id) {
-//        this.preparacoesCriadas = preparacoesCriadas;
-//        this.ingredientesCriados = ingredientesCriados;
-//        this.email = email;
-//        this.senha = senha;
-//        this.nome = nome;
-//        this.id = id;
-//    }
-//
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-//
-//    public String getNome() {
-//        return nome;
-//    }
-//
-//    public void setNome(String nome) {
-//        this.nome = nome;
-//    }
-//
-//    public String getSenha() {
-//        return senha;
-//    }
-//
-//    public void setSenha(String senha) {
-//        this.senha = senha;
-//    }
-//
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
-//
-//    public List<Ingrediente> getIngredientesCriados() {
-//        return ingredientesCriados;
-//    }
-//
-//    public void setIngredientesCriados(List<Ingrediente> ingredientesCriados) {
-//        this.ingredientesCriados = ingredientesCriados;
-//    }
-//
-//    public List<Preparacao> getPreparacoesCriadas() {
-//        return preparacoesCriadas;
-//    }
-//
-//    public void setPreparacoesCriadas(List<Preparacao> preparacoesCriadas) {
-//        this.preparacoesCriadas = preparacoesCriadas;
-//    }
+
+    public Usuario(String senha, String nome, String email) {
+        this.senha = senha;
+        this.nome = nome;
+        this.email = email;
+
+    }
+
+    public Usuario(List<Preparacao> preparacoesCriadas, List<Ingrediente> ingredientesCriados, String email, String senha, String nome, int id) {
+        this.preparacoesCriadas = preparacoesCriadas;
+        this.ingredientesCriados = ingredientesCriados;
+        this.email = email;
+        this.senha = senha;
+        this.nome = nome;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<Ingrediente> getIngredientesCriados() {
+        return ingredientesCriados;
+    }
+
+    public void setIngredientesCriados(List<Ingrediente> ingredientesCriados) {
+        this.ingredientesCriados = ingredientesCriados;
+    }
+
+    public List<Preparacao> getPreparacoesCriadas() {
+        return preparacoesCriadas;
+    }
+
+    public void setPreparacoesCriadas(List<Preparacao> preparacoesCriadas) {
+        this.preparacoesCriadas = preparacoesCriadas;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
