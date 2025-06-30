@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IngNaPrepRepository extends JpaRepository<IngredienteNaPreparacao, Integer> {
 
-    //List<IngredienteNaPreparacao> findAllByPreparacaoPertencente(int id);
+
 }

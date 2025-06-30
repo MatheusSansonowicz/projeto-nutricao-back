@@ -1,5 +1,6 @@
 package com.example.projetonutricaoback.controllers;
 
+
 import com.example.projetonutricaoback.models.Ingrediente;
 import com.example.projetonutricaoback.models.IngredienteNaPreparacao;
 import com.example.projetonutricaoback.models.Preparacao;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+
 import java.util.List;
 
 @RestController
@@ -16,6 +18,7 @@ import java.util.List;
 public class PreparacaoController {
 
     private final PreparacaoRepository preparacaoRepository;
+
 
     private final IngredienteRepository ingredienteRepository;
 
@@ -58,12 +61,33 @@ public class PreparacaoController {
         preparacaoRepository.deleteById(id);
     }
 
+    @GetMapping("/{usuario_id}")
+    public List<Preparacao> listaPreparacoes(int id) {
+        return preparacaoRepository.findAllByUsuarioCriadorPreparacaoId(id);
+    }
+
+    @GetMapping("/{id}")
+    public Preparacao getPreparacao(int id) {
+        return preparacaoRepository.findById(id).get();
+    }
+
+    @PostMapping("/criarPrepacaro")
+    public Preparacao criarPreparacao(@RequestBody Preparacao preparacao) {
+        return preparacaoRepository.save(preparacao);
+    }
+
+    @DeleteMapping("/deletarpreparacao/{id}")
+    public void deletarPreparacao(@RequestBody Preparacao preparacao) {
+        preparacaoRepository.delete(preparacao);
+
+    }
+
     @PutMapping("/editarPreparacao")
     public Preparacao editarPreparacao(@RequestBody Preparacao preparacao) {
+
         Preparacao existente = preparacaoRepository.findById(preparacao.getId())
                 .orElseThrow(() -> new RuntimeException("Preparação não encontrada"));
 
         return preparacaoRepository.save(preparacao);
     }
-
 }
