@@ -45,4 +45,11 @@ public class IngredienteController {
         ingredienteRepository.delete(ingrediente);
         return ingredienteRepository.save(ingrediente);
     }
+
+
+    @GetMapping("/buscarPorNome")
+    public List<Ingrediente> buscarPorNome(@RequestParam String nome) {
+        return ingredienteRepository.findByNomeContainingIgnoreCase(nome);
+    }
+
 }

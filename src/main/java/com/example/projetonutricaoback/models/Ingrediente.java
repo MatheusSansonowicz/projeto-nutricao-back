@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
-
 public class Ingrediente {
 
     @Id
@@ -23,7 +22,11 @@ public class Ingrediente {
 
     //atributos nao obrigatorios - nao encontrados na taco
     @Column(nullable = true)
-    private Double sodio;
+
+    private double sodio;
+
+    private Double sodioO;
+
     @Column(nullable = true)
     private Double gordSaturada;
 
@@ -33,8 +36,10 @@ public class Ingrediente {
     private Usuario usuarioCriadorIngrediente;
 
     public int getId() {
-        return id;
+        return Id;
     }
+
+
 
     public void setId(int id) {
         id = id;
@@ -61,7 +66,8 @@ public class Ingrediente {
     }
 
     public void setCarboidratos(double carboidratos) {
-        carboidratos = carboidratos;
+        this.carboidratos = carboidratos;
+
     }
 
     public double getLipidios() {
@@ -73,9 +79,9 @@ public class Ingrediente {
     }
 
     public double getSodio() {
-        if (sodio == null) {
-            return 0.0;
-        }
+        //if (sodioO == null) {
+         //   return 0.0;
+        //}
         return sodio;
     }
 
@@ -84,13 +90,12 @@ public class Ingrediente {
     }
 
     public double getGordSaturada() {
-        if (gordSaturada == null) {
-            return 0.0;
-        }
+        
         return gordSaturada;
     }
 
     public void setGordSaturada(double gordSaturada) {
+
         this.gordSaturada = gordSaturada;
     }
 
@@ -101,7 +106,6 @@ public class Ingrediente {
     public void setUsuarioCriadorIngrediente(Usuario usuarioCriadorIngrediente) {
         this.usuarioCriadorIngrediente = usuarioCriadorIngrediente;
     }
-
     public Ingrediente(int id, String nome, double proteinas, double carboidratos, double lipidios, Double sodio, Double gordSaturada, Usuario usuarioCriadorIngrediente) {
         this.id = id;
         this.nome = nome;
@@ -134,4 +138,5 @@ public class Ingrediente {
         this.sodio = sodio;
         this.gordSaturada = gordSaturada;
     }
+
 }
