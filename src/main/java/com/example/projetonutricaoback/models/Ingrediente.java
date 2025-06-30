@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Data
 public class Ingrediente {
 
     @Id
@@ -13,22 +12,85 @@ public class Ingrediente {
 
     //atributos puxados da taco ou inseridos p usuario
     @Column(unique = true, nullable = false)
-    private String Nome;
+    private String nome;
     @Column(nullable = false)
-    private double Proteinas;
+    private double proteinas;
     @Column(nullable = false)
-    private double Carboidratos;
+    private double carboidratos;
     @Column(nullable = false)
-    private double Lipidios;
+    private double lipidios;
 
     //atributos nao obrigatorios - nao encontrados na taco
     @Column(nullable = true)
-    private double Sodio;
+    private double sodio;
     @Column(nullable = true)
-    private double GordSaturada;
+    private Double gordSaturada;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuarioCriadorIngrediente;
 
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public double getProteinas() {
+        return proteinas;
+    }
+
+    public void setProteinas(double proteinas) {
+        this.proteinas = proteinas;
+    }
+
+    public double getCarboidratos() {
+        return carboidratos;
+    }
+
+    public void setCarboidratos(double carboidratos) {
+        this.carboidratos = carboidratos;
+    }
+
+    public double getLipidios() {
+        return lipidios;
+    }
+
+    public void setLipidios(double lipidios) {
+        this.lipidios = lipidios;
+    }
+
+    public double getSodio() {
+        return sodio;
+    }
+
+    public void setSodio(double sodio) {
+        this.sodio = sodio;
+    }
+
+    public Double getGordSaturada() {
+        return gordSaturada;
+    }
+
+    public void setGordSaturada(Double gordSaturada) {
+        this.gordSaturada = gordSaturada;
+    }
+
+    public Usuario getUsuarioCriadorIngrediente() {
+        return usuarioCriadorIngrediente;
+    }
+
+    public void setUsuarioCriadorIngrediente(Usuario usuarioCriadorIngrediente) {
+        this.usuarioCriadorIngrediente = usuarioCriadorIngrediente;
+    }
 }
