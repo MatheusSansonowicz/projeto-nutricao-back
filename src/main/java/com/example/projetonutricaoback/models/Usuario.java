@@ -1,41 +1,39 @@
 package com.example.projetonutricaoback.models;
 
+
+import com.example.projetonutricaoback.security.domain.UserRole;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 
-public class Usuario {
+@Data
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String nome;
-
     @Column(nullable = false)
+
     private String senha;
 
     @Column(unique = true)
     private String email;
 
-    //@GeneratedValue(strategy = GenerationType.UUID)
-    //private String Login;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
-//    @GeneratedValue(strategy = GenerationType.UUID)
-//    private String Login;
-//
-//    public boolean Login() {
-//        return false;
-//    }
-//
-//    public boolean Deslogar() {
-//        return false;
-//    }
 
     @OneToMany(mappedBy = "usuarioCriadorIngrediente")
     @JsonBackReference
@@ -45,16 +43,14 @@ public class Usuario {
     @JsonBackReference
     private List<Preparacao> preparacoesCriadas;
 
-//    public boolean equals(String senha) {
-//        if (senha == null) return false;
-//        return Objects.equals(senha, this.senha);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hashCode(senha);
-//    }
+    public Usuario() {
+    }
 
+    public Usuario(String senha, String nome, String email, UserRole role) {
+        this.senha = senha;
+        this.nome = nome;
+        this.email = email;
+        this.role = role;
 
     public Usuario() {
 
@@ -64,6 +60,7 @@ public class Usuario {
         this.senha = senha;
         this.nome = nome;
         this.email = email;
+
     }
 
     public Usuario(List<Preparacao> preparacoesCriadas, List<Ingrediente> ingredientesCriados, String email, String senha, String nome, int id) {
@@ -117,6 +114,52 @@ public class Usuario {
 
     public List<Preparacao> getPreparacoesCriadas() {
         return preparacoesCriadas;
+    }
+
+    public void setPreparacoesCriadas(List<Preparacao> preparacoesCriadas) {
+        this.preparacoesCriadas = preparacoesCriadas;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this.role == UserRole.ADMIN) {
+            return List.of(
+                new SimpleGrantedAuthority("ROLE_ADMIN"),
+                new SimpleGrantedAuthority("ROLE_USER")
+            );
+        }
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
+    public String getPassword() {
+        return senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+
     }
 
     public void setPreparacoesCriadas(List<Preparacao> preparacoesCriadas) {

@@ -21,6 +21,22 @@ public class UsuarioControler {
     public UsuarioControler(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
+
+    @GetMapping
+    public List<Usuario> findAll() {
+        return usuarioRepository.findAll();
+    }
+
+    @PostMapping("/registro")
+    public Usuario post(@RequestBody Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
+
+    @GetMapping("/{id}")
+    public Usuario getById(@PathVariable int id) {
+        return usuarioRepository.findById(id).orElseThrow();
+    }
+
     @GetMapping("/{email}")
     public Usuario findByEmail(@PathVariable String email) {
         return usuarioRepository.findByEmail(email)
