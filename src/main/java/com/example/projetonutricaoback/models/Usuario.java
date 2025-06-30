@@ -1,6 +1,10 @@
 package com.example.projetonutricaoback.models;
 
+
 import com.example.projetonutricaoback.security.domain.UserRole;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,13 +15,16 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
+
 @Data
 public class Usuario implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String nome;
+    @Column(nullable = false)
 
     private String senha;
 
@@ -27,35 +34,14 @@ public class Usuario implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    //@GeneratedValue(strategy = GenerationType.UUID)
-    //private String Login;
-
-//    @GeneratedValue(strategy = GenerationType.UUID)
-//    private String Login;
-//
-//    public boolean Login() {
-//        return false;
-//    }
-//
-//    public boolean Deslogar() {
-//        return false;
-//    }
 
     @OneToMany(mappedBy = "usuarioCriadorIngrediente")
+    @JsonBackReference
     private List<Ingrediente> ingredientesCriados;
 
     @OneToMany(mappedBy = "usuarioCriadorPreparacao")
+    @JsonBackReference
     private List<Preparacao> preparacoesCriadas;
-
-//    public boolean equals(String senha) {
-//        if (senha == null) return false;
-//        return Objects.equals(senha, this.senha);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hashCode(senha);
-//    }
 
     public Usuario() {
     }
@@ -65,6 +51,16 @@ public class Usuario implements UserDetails {
         this.nome = nome;
         this.email = email;
         this.role = role;
+
+    public Usuario() {
+
+    }
+
+    public Usuario(String senha, String nome, String email) {
+        this.senha = senha;
+        this.nome = nome;
+        this.email = email;
+
     }
 
     public Usuario(List<Preparacao> preparacoesCriadas, List<Ingrediente> ingredientesCriados, String email, String senha, String nome, int id) {
@@ -163,5 +159,10 @@ public class Usuario implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+
+    }
+
+    public void setPreparacoesCriadas(List<Preparacao> preparacoesCriadas) {
+        this.preparacoesCriadas = preparacoesCriadas;
     }
 }
