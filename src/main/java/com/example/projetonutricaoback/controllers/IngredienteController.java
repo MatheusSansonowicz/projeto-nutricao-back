@@ -26,6 +26,15 @@ public class IngredienteController {
         return ingredienteRepository.save(ingrediente);
     }
 
+    @GetMapping("/listaNome/{nome}")
+    public List<Ingrediente> listaIngredientes(@PathVariable String nome) {
+        return ingredienteRepository.findByNomeContaining(nome);
+    }
+    @GetMapping("/ingredienteEscolhido")
+    public Ingrediente IngredientePorNome(@PathVariable String nome){
+        return ingredienteRepository.findByNomeIsContaining(nome);
+    }
+
     @DeleteMapping
     public void deletarIngrediente(@RequestBody Ingrediente ingrediente) {
         ingredienteRepository.delete(ingrediente);

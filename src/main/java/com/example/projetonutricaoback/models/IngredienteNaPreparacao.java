@@ -96,5 +96,4 @@ public class IngredienteNaPreparacao {
 		this.gorduraSatIngPrep = this.ingrediente.getGordSaturada()*this.getPesoLiquido();
 		return gorduraSatIngPrep;
 	}
-
 }

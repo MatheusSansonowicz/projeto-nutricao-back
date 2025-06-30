@@ -16,9 +16,9 @@ public class PreparacaoController {
         this.preparacaoRepository = preparacaoRepository;
     }
 
-    @GetMapping
-    public List<Preparacao> listaPreparacoes() {
-        return preparacaoRepository.findAll();
+    @GetMapping("/{usuario_id}")
+    public List<Preparacao> listaPreparacoes(int id) {
+        return preparacaoRepository.findAllByUsuarioCriadorPreparacaoId(id);
     }
 
     @GetMapping("/{id}")
@@ -31,7 +31,7 @@ public class PreparacaoController {
         return preparacaoRepository.save(preparacao);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/deletarpreparacao/{id}")
     public void deletarPreparacao(@RequestBody Preparacao preparacao) {
         preparacaoRepository.delete(preparacao);
     }

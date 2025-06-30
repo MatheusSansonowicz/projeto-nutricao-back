@@ -18,7 +18,7 @@ public class Preparacao {
 
 	// 1 - Cabeçalho
 	@ManyToOne
-	@JsonIgnore
+	@JsonBackReference
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuarioCriadorPreparacao;
 
@@ -30,7 +30,6 @@ public class Preparacao {
 
 	// 2- Primeira metade da ficha
 	@OneToMany(mappedBy = "preparacaoPertencente")
-	@JsonManagedReference
 	private List<IngredienteNaPreparacao> ingredientesUsados;
 
     @Column(columnDefinition = "TEXT")
